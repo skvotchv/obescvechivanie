@@ -1,21 +1,21 @@
 import numpy as np
 
 def nonlin(x, deriv = False):
-	if(deriv == True):
-           return(x * (1 - x))
-
-	return(1 / (1 + np.exp(-x)))
+    if(deriv == True):
+        return(x * (1 - x))
+    else:
+        return(1 / (1 + np.exp(-x)))
     
-X = np.array([[0, 0, 1, 0, 1, 0, 1, 0, 1, 1],
-            [0, 1, 1, 0, 1, 0, 1, 1, 0, 0],
-            [1, 0, 2, 1, 0, 0, 1, 0, 1, 1],
-            [1, 1, 1, 0, 1, 0, 1, 1, 1, 0]])
+X = np.array([[0, 0, 1, 0, 4, 0, 1, 0, 1, 1],
+              [0, 1, 1, 0, 1, 0, 1, 1, 0, 0],
+              [1, 0, 6, 1, 0, 0, 1, 0, 1, 1],
+              [1, 1, 1, 8, 1, 0, 1, 1, 1, 0]], dtype = int)
 print(X)
                
 y = np.array([[1],
-			[0],
-			[1],
-			[1]])
+	      [2],
+	      [1],
+	      [1]], dtype = int)
 print(y)
 
 np.random.seed(1)
