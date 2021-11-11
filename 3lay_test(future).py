@@ -22,9 +22,6 @@ print(y)
 
 np.random.seed(1)
 
-
-
-# случайно инициализируем веса, в среднем - 0
 syn0 = 2 * np.random.random((10, 4)) - 1
 syn1 = 2 * np.random.random((4, 4)) - 1
 syn2 = 2 * np.random.random((4, 1)) - 1
@@ -33,27 +30,20 @@ print(syn0, syn1, syn2)
 
 for j in range(20000):
 
-	# проходим вперёд по слоям 0, 1, 2 и 3
     l0 = X
     l1 = nonlin(np.dot(l0, syn0))
     l2 = nonlin(np.dot(l1, syn1))
     l3 = nonlin(np.dot(l2, syn2))
 
-    # как сильно мы ошиблись относительно нужной величины?
     l3_error = y - l3
     
     if (j% 10000) == 0:
         print("Error:" + str(np.mean(np.abs(l3_error))))
         
-    # в какую сторону нужно двигаться?
-    # если мы были уверены в предсказании, то сильно менять его не надо
     l3_delta = l3_error * nonlin(l3, deriv=True)
 
-    # как сильно значения l3 влияют на ошибки в l2?
     l2_error = l3_delta.dot(syn2.T)
     
-    # в каком направлении нужно двигаться, чтобы прийти к l2?
-    # если мы были уверены в предсказании, то сильно менять его не надо
     l2_delta = l2_error * nonlin(l2, deriv=True)
 
     l1_error = l2_delta.dot(syn1.T)
